@@ -1,0 +1,301 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #24324a;
+  background: #eaf5ff;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: linear-gradient(#eaf7ff 0%, #f7fbff 65%, #eaf8e7 65%, #dff2d8 100%);
+}
+
+button, input {
+  font: inherit;
+}
+
+.game {
+  width: min(950px, 94vw);
+  margin: 0 auto;
+  padding: 24px 0 40px;
+  position: relative;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.4rem);
+}
+
+.subtitle {
+  margin: 5px 0 0;
+  font-size: 1.15rem;
+}
+
+.score-box {
+  background: white;
+  border-radius: 18px;
+  padding: 10px 18px;
+  text-align: center;
+  box-shadow: 0 5px 18px rgba(36, 50, 74, .10);
+  min-width: 95px;
+}
+
+.score-box span {
+  display: block;
+  font-size: .9rem;
+}
+
+.score-box strong {
+  font-size: 1.8rem;
+}
+
+.progress-area {
+  margin: 22px 0 12px;
+}
+
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+
+.progress-track {
+  height: 14px;
+  background: white;
+  border-radius: 99px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 4px rgba(0,0,0,.12);
+}
+
+#progressBar {
+  width: 0%;
+  height: 100%;
+  background: #61b15a;
+  border-radius: inherit;
+  transition: width .35s ease;
+}
+
+.scene {
+  height: 190px;
+  background: linear-gradient(#aee2ff, #dff5ff);
+  border-radius: 26px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 7px 22px rgba(36, 50, 74, .12);
+  margin-bottom: 22px;
+}
+
+.cloud {
+  position: absolute;
+  font-size: 3rem;
+  opacity: .8;
+}
+
+.cloud1 { left: 12%; top: 22px; }
+.cloud2 { right: 18%; top: 50px; }
+
+.character, .finish {
+  position: absolute;
+  bottom: 48px;
+  font-size: 4.5rem;
+  z-index: 3;
+  transition: left .7s ease;
+}
+
+.character {
+  left: 3%;
+}
+
+.finish {
+  right: 3%;
+}
+
+.road {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 68px;
+  background: #c6c6c6;
+}
+
+.road-line {
+  position: absolute;
+  top: 29px;
+  left: 0;
+  width: 100%;
+  height: 7px;
+  background: repeating-linear-gradient(
+    90deg,
+    #fff 0 45px,
+    transparent 45px 85px
+  );
+}
+
+.typing-card {
+  background: white;
+  border-radius: 26px;
+  padding: 28px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(36, 50, 74, .13);
+}
+
+.sentence {
+  font-size: clamp(1.9rem, 5vw, 3.1rem);
+  font-weight: 700;
+  letter-spacing: .02em;
+  min-height: 65px;
+  margin-bottom: 18px;
+}
+
+.input-wrap {
+  max-width: 760px;
+  margin: auto;
+}
+
+#typingInput {
+  width: 100%;
+  border: 4px solid #b9c8da;
+  border-radius: 17px;
+  padding: 15px 18px;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  outline: none;
+  text-align: center;
+}
+
+#typingInput:focus {
+  border-color: #5b8def;
+  box-shadow: 0 0 0 4px rgba(91,141,239,.13);
+}
+
+.hint {
+  margin: 12px 0 0;
+  color: #65748a;
+}
+
+.celebration {
+  height: 0;
+  position: relative;
+  text-align: center;
+  pointer-events: none;
+}
+
+.celebration-message {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(10px) scale(.8);
+  font-size: 2rem;
+  font-weight: bold;
+  background: white;
+  padding: 10px 20px;
+  border-radius: 18px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
+  transition: .35s ease;
+  position: relative;
+  top: -85px;
+}
+
+.celebration.show .celebration-message {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.start-screen, .finished-screen {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 48, 70, .35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 20;
+}
+
+.start-card, .finished-card {
+  width: min(440px, 95vw);
+  background: white;
+  border-radius: 30px;
+  padding: 35px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,.2);
+}
+
+.big-emoji {
+  font-size: 5rem;
+}
+
+.start-card h2, .finished-card h2 {
+  font-size: 2.5rem;
+  margin: 5px 0;
+}
+
+.start-card p, .finished-card p {
+  font-size: 1.2rem;
+  line-height: 1.45;
+}
+
+button {
+  border: 0;
+  border-radius: 15px;
+  padding: 14px 28px;
+  background: #5b8def;
+  color: white;
+  font-weight: bold;
+  font-size: 1.25rem;
+  cursor: pointer;
+  box-shadow: 0 5px 0 #3d6fc9;
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #3d6fc9;
+}
+
+.final-stars {
+  font-size: 1.8rem;
+  margin: 20px 0;
+  word-break: break-word;
+}
+
+.finished-screen {
+  display: none;
+}
+
+.start-screen.hidden {
+  display: none;
+}
+
+.finished-screen.show {
+  display: flex;
+}
+
+.correct-flash {
+  animation: correctFlash .55s ease;
+}
+
+@keyframes correctFlash {
+  50% { transform: scale(1.03); }
+}
+
+@media (max-width: 600px) {
+  .game { padding-top: 14px; }
+  .scene { height: 155px; }
+  .character, .finish { font-size: 3.5rem; bottom: 44px; }
+  .typing-card { padding: 20px 15px; }
+}

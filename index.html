@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Type & Go!</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game">
+    <header>
+      <div>
+        <h1>⌨️ Type & Go!</h1>
+        <p class="subtitle">Type the words you see.</p>
+      </div>
+      <div class="score-box">
+        <span>⭐ Stars</span>
+        <strong id="stars">0</strong>
+      </div>
+    </header>
+
+    <section class="progress-area">
+      <div class="progress-label">
+        <span id="progressText">Sentence 1 of 10</span>
+        <span id="streakText">Ready!</span>
+      </div>
+      <div class="progress-track">
+        <div id="progressBar"></div>
+      </div>
+    </section>
+
+    <section class="scene" id="scene">
+      <div class="cloud cloud1">☁️</div>
+      <div class="cloud cloud2">☁️</div>
+      <div class="character" id="character">🐶</div>
+      <div class="finish">🏠</div>
+      <div class="road">
+        <div class="road-line"></div>
+      </div>
+    </section>
+
+    <section class="typing-card">
+      <div class="sentence" id="sentence" aria-label="Sentence to type"></div>
+      <div class="input-wrap">
+        <input
+          id="typingInput"
+          type="text"
+          autocomplete="off"
+          autocapitalize="off"
+          spellcheck="false"
+          aria-label="Type the sentence here"
+          placeholder="type here..."
+        >
+      </div>
+      <p class="hint">Use lowercase letters. Take your time!</p>
+    </section>
+
+    <section class="celebration" id="celebration" aria-live="polite">
+      <div class="celebration-message" id="celebrationMessage">🎉 Great job! 🎉</div>
+    </section>
+
+    <section class="start-screen" id="startScreen">
+      <div class="start-card">
+        <div class="big-emoji">🐶</div>
+        <h2>Let's Go!</h2>
+        <p>Type each sentence to help the puppy get home.</p>
+        <button id="startButton">Start Game</button>
+      </div>
+    </section>
+
+    <section class="finished-screen" id="finishedScreen">
+      <div class="finished-card">
+        <div class="big-emoji">🏠🐶</div>
+        <h2>You did it!</h2>
+        <p id="finalText">You typed 10 sentences!</p>
+        <div class="final-stars" id="finalStars">⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐</div>
+        <button id="playAgainButton">Play Again</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
