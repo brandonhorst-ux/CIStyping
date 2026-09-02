@@ -1,84 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Type & Go!</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <main class="game">
-    <header>
-      <div>
-        <h1>⌨️ Type & Go!</h1>
-        <p class="subtitle">Type the words you see.</p>
-      </div>
-      <div class="score-box">
-        <span>⭐ Stars</span>
-        <strong id="stars">0</strong>
-      </div>
-    </header>
-
-    <section class="progress-area">
-      <div class="progress-label">
-        <span id="progressText">Sentence 1 of 10</span>
-        <span id="streakText">Ready!</span>
-      </div>
-      <div class="progress-track">
-        <div id="progressBar"></div>
-      </div>
-    </section>
-
-    <section class="scene" id="scene">
-      <div class="cloud cloud1">☁️</div>
-      <div class="cloud cloud2">☁️</div>
-      <div class="character" id="character">🐶</div>
-      <div class="finish">🏠</div>
-      <div class="road">
-        <div class="road-line"></div>
-      </div>
-    </section>
-
-    <section class="typing-card">
-      <div class="sentence" id="sentence" aria-label="Sentence to type"></div>
-      <div class="input-wrap">
-        <input
-          id="typingInput"
-          type="text"
-          autocomplete="off"
-          autocapitalize="off"
-          spellcheck="false"
-          aria-label="Type the sentence here"
-          placeholder="type here..."
-        >
-      </div>
-      <p class="hint">Use lowercase letters. Take your time!</p>
-    </section>
-
-    <section class="celebration" id="celebration" aria-live="polite">
-      <div class="celebration-message" id="celebrationMessage">🎉 Great job! 🎉</div>
-    </section>
-
-    <section class="start-screen" id="startScreen">
-      <div class="start-card">
-        <div class="big-emoji">🐶</div>
-        <h2>Let's Go!</h2>
-        <p>Type each sentence to help the puppy get home.</p>
-        <button id="startButton">Start Game</button>
-      </div>
-    </section>
-
-    <section class="finished-screen" id="finishedScreen">
-      <div class="finished-card">
-        <div class="big-emoji">🏠🐶</div>
-        <h2>You did it!</h2>
-        <p id="finalText">You typed 10 sentences!</p>
-        <div class="final-stars" id="finalStars">⭐⭐⭐⭐⭐⭐⭐⭐⭐⭐</div>
-        <button id="playAgainButton">Play Again</button>
-      </div>
-    </section>
-  </main>
-
-  <script src="game.js"></script>
-</body>
-</html>
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Type & Go!</title><link rel="stylesheet" href="style.css"></head><body>
+<main class="app"><header><h1>⌨️ Type & Go!</h1><div class="stats">⭐ <b id="stars">0</b>　🔥 <b id="streak">0</b>　<button id="settingsBtn">⚙️</button></div></header>
+<div class="progress"><div id="progressBar"></div></div>
+<section class="scene"><div class="cloud c1">☁️</div><div class="cloud c2">☁️</div><div id="puppy" class="puppy">🐶</div><div class="house">🏠</div><div class="road"></div></section>
+<section class="card"><div id="sentence" class="sentence">Press Start Game to begin!</div><input id="typingInput" autocomplete="off" autocapitalize="none" spellcheck="false"><p id="hint">Type the sentence using lowercase letters.</p></section>
+<div id="reward" class="reward"></div><button id="startBtn" class="primary">▶ Start Game</button></main>
+<div id="startModal" class="modal show"><div class="modalCard"><h2>⌨️ Ready to Type?</h2><p>Type the short sentence you see. Take your time—there is no timer!</p><button id="modalStart" class="primary">Let's Go! 🚀</button><button id="modalSettings" class="secondary">Teacher Settings ⚙️</button></div></div>
+<div id="finishedModal" class="modal"><div class="modalCard"><h2>🎉 You Did It! 🎉</h2><p id="finalMessage"></p><button id="againBtn" class="primary">Play Again 🔄</button></div></div>
+<div id="settingsModal" class="modal"><div class="modalCard settings"><h2>⚙️ Teacher Settings</h2>
+<label><input type="checkbox" id="soundOn"> Sounds on</label><label>Volume <input type="range" id="volume" min="0" max="100" value="60"></label>
+<label>Sentences per game <select id="count"><option value="5">5</option><option value="10">10</option><option value="15">15</option><option value="20">20</option><option value="all">All</option></select></label>
+<label>Wrong keys <select id="wrongMode"><option value="block">Block wrong letters</option><option value="allow">Allow wrong letters</option></select></label>
+<h3>Sentences</h3><div id="sentenceEditor"></div><button id="addSentence" class="secondary">＋ Add sentence</button> <button id="resetSentences" class="secondary">Reset defaults</button><br>
+<button id="saveSettings" class="primary">Save & Close</button><button id="closeSettings" class="secondary">Cancel</button></div></div>
+<script src="game.js"></script></body></html>

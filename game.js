@@ -1,116 +1,15 @@
-const sentences = [
-  "the dog runs fast",
-  "i see a red ball",
-  "the cat is sleeping",
-  "we like to play",
-  "the sun is very bright",
-  "the dog has a bone",
-  "i can type words",
-  "the bird can fly",
-  "we go to the park",
-  "the puppy is happy"
-];
-
-const sentenceEl = document.getElementById("sentence");
-const input = document.getElementById("typingInput");
-const starsEl = document.getElementById("stars");
-const progressText = document.getElementById("progressText");
-const streakText = document.getElementById("streakText");
-const progressBar = document.getElementById("progressBar");
-const character = document.getElementById("character");
-const celebration = document.getElementById("celebration");
-const celebrationMessage = document.getElementById("celebrationMessage");
-const startScreen = document.getElementById("startScreen");
-const finishedScreen = document.getElementById("finishedScreen");
-const startButton = document.getElementById("startButton");
-const playAgainButton = document.getElementById("playAgainButton");
-const finalText = document.getElementById("finalText");
-const finalStars = document.getElementById("finalStars");
-
-let current = 0;
-let stars = 0;
-let streak = 0;
-let accepting = false;
-
-function startGame() {
-  current = 0;
-  stars = 0;
-  streak = 0;
-  accepting = true;
-  starsEl.textContent = stars;
-  finishedScreen.classList.remove("show");
-  startScreen.classList.add("hidden");
-  loadSentence();
-}
-
-function loadSentence() {
-  accepting = true;
-  sentenceEl.textContent = sentences[current];
-  progressText.textContent = `Sentence ${current + 1} of ${sentences.length}`;
-  streakText.textContent = streak > 1 ? `🔥 ${streak} in a row!` : "Ready!";
-  progressBar.style.width = `${(current / sentences.length) * 100}%`;
-  input.value = "";
-  input.disabled = false;
-  input.focus();
-}
-
-function celebrate() {
-  accepting = false;
-  input.disabled = true;
-  stars++;
-  streak++;
-  starsEl.textContent = stars;
-  streakText.textContent = `🔥 ${streak} in a row!`;
-  progressBar.style.width = `${((current + 1) / sentences.length) * 100}%`;
-
-  character.style.left = `${Math.min(88, 3 + ((current + 1) / sentences.length) * 82)}%`;
-
-  celebrationMessage.textContent =
-    streak >= 3 ? "🌟 Awesome! 🌟" : "🎉 Great job! 🎉";
-  celebration.classList.add("show");
-  sentenceEl.classList.add("correct-flash");
-
-  setTimeout(() => {
-    celebration.classList.remove("show");
-    sentenceEl.classList.remove("correct-flash");
-
-    if (current >= sentences.length - 1) {
-      finishGame();
-    } else {
-      current++;
-      loadSentence();
-    }
-  }, 1200);
-}
-
-function finishGame() {
-  finalText.textContent = `You typed all ${sentences.length} sentences!`;
-  finalStars.textContent = "⭐".repeat(stars);
-  finishedScreen.classList.add("show");
-}
-
-input.addEventListener("input", () => {
-  if (!accepting) return;
-
-  // Keep the game lowercase-friendly and prevent accidental capitalization.
-  let typed = input.value.toLowerCase();
-  if (typed !== input.value) {
-    input.value = typed;
-  }
-
-  const target = sentences[current];
-
-  // Only accept characters that match the sentence at the current position.
-  // This keeps the activity low-frustration: a wrong key simply does not stay.
-  if (!target.startsWith(input.value)) {
-    input.value = input.value.slice(0, -1);
-    return;
-  }
-
-  if (input.value === target) {
-    celebrate();
-  }
-});
-
-startButton.addEventListener("click", startGame);
-playAgainButton.addEventListener("click", startGame);
+const DEFAULT=["the dog runs","i see a cat","the dog has a ball","we like to play","the cat is sleeping","i can type","the bird can fly","go to the door","the sun is hot","the puppy is happy"];
+const KEY="typeAndGoSettingsV2";let s=JSON.parse(localStorage.getItem(KEY)||"null")||{sentences:[...DEFAULT],soundOn:true,volume:.6,count:"10",wrongMode:"block"},game=[],i=0,stars=0,streak=0,ctx=null;
+const $=x=>document.getElementById(x),inp=$("typingInput");
+function save(){localStorage.setItem(KEY,JSON.stringify(s))}function shuffle(a){return [...a].sort(()=>Math.random()-.5)}
+function audio(){if(!ctx)ctx=new(window.AudioContext||window.webkitAudioContext)();if(ctx.state==="suspended")ctx.resume()}
+function tone(f,d=.07,t="sine",g=.035,delay=0){if(!s.soundOn)return;audio();let o=ctx.createOscillator(),a=ctx.createGain();o.type=t;o.frequency.value=f;a.gain.setValueAtTime(0,ctx.currentTime+delay);a.gain.linearRampToValueAtTime(g*s.volume,ctx.currentTime+delay+.01);a.gain.exponentialRampToValueAtTime(.001,ctx.currentTime+delay+d);o.connect(a).connect(ctx.destination);o.start(ctx.currentTime+delay);o.stop(ctx.currentTime+delay+d+.02)}
+function render(){let target=game[i]||"",typed=inp.value,html="";for(let n=0;n<target.length;n++){let c=n<typed.length?(typed[n]===target[n]?"done":"wrong"):(n===typed.length?"current":"");html+=`<span class="${c}">${target[n]===" "?"·":target[n]}</span>`}$("sentence").innerHTML=html;$("progressBar").style.width=(game.length?i/game.length*100:0)+"%"}
+function burst(big=false){let e=big?["🎉","⭐","🎈","✨","🌟","🐶"]:["⭐","✨","🎈","🌟"];e.forEach((x,n)=>{let q=document.createElement("span");q.className="burst";q.textContent=x;q.style.left="50%";q.style.top="45%";q.style.setProperty("--x",(n-(e.length-1)/2)*90+"px");q.style.setProperty("--y",-80-Math.abs(n-(e.length-1)/2)*35+"px");document.body.appendChild(q);setTimeout(()=>q.remove(),1000)})}
+function reward(){let m=["🎉 Great job! 🎉","⭐ Awesome! ⭐","🐶 You did it! 🐶","🌟 Super typing! 🌟","🎈 Nice work! 🎈"];$("reward").textContent=m[Math.floor(Math.random()*m.length)];$("reward").classList.remove("pop");void $("reward").offsetWidth;$("reward").classList.add("pop");$("puppy").classList.remove("dance");void $("puppy").offsetWidth;$("puppy").classList.add("dance");$("puppy").style.left=Math.min(76,7+(i+1)*6.8)+"%";tone(523,.1);tone(659,.12,"sine",.05,.08);tone(784,.18,"sine",.05,.18);burst()}
+function start(){audio();game=shuffle(s.sentences).slice(0,s.count==="all"?s.sentences.length:Number(s.count));i=stars=streak=0;$("stars").textContent=$("streak").textContent=0;$("startModal").classList.remove("show");$("finishedModal").classList.remove("show");inp.disabled=false;inp.value="";inp.focus();render()}
+inp.addEventListener("keydown",e=>{if(e.key.length===1){if(s.wrongMode==="block"){let t=game[i]||"",p=inp.value.length;if(p>=t.length||e.key!==t[p]){e.preventDefault();tone(170,.06,"sine",.018);return}}tone(e.key===" "?230:360,.045,"sine",.025)}})
+inp.addEventListener("input",()=>{inp.value=inp.value.toLowerCase();let t=game[i]||"";if(inp.value===t&&t){stars++;streak++;$("stars").textContent=stars;$("streak").textContent=streak;reward();inp.disabled=true;i++;setTimeout(()=>{if(i>=game.length){$("progressBar").style.width="100%";[523,659,784,1047].forEach((f,n)=>tone(f,.18,"triangle",.055,n*.1));burst(true);$("finalMessage").textContent=`You typed ${game.length} sentence${game.length===1?"":"s"} and earned ${stars} ⭐!`;$("finishedModal").classList.add("show")}else{inp.disabled=false;inp.value="";$("reward").textContent="";inp.focus();render()}},1100)}else render()});
+function edit(){let e=$("sentenceEditor");e.innerHTML="";s.sentences.forEach((x,n)=>{let r=document.createElement("div");r.className="editorRow";let q=document.createElement("input");q.value=x;q.oninput=v=>s.sentences[n]=v.target.value.toLowerCase();let b=document.createElement("button");b.className="delete";b.textContent="Delete";b.onclick=()=>{s.sentences.splice(n,1);edit()};r.append(q,b);e.appendChild(r)})}
+function settings(){ $("soundOn").checked=s.soundOn;$("volume").value=s.volume*100;$("count").value=s.count;$("wrongMode").value=s.wrongMode;edit();$("settingsModal").classList.add("show")}
+$("addSentence").onclick=()=>{s.sentences.push("i like to type");edit()};$("resetSentences").onclick=()=>{s.sentences=[...DEFAULT];edit()};$("saveSettings").onclick=()=>{s.soundOn=$("soundOn").checked;s.volume=$("volume").value/100;s.count=$("count").value;s.wrongMode=$("wrongMode").value;s.sentences=s.sentences.map(x=>x.trim().toLowerCase()).filter(Boolean);if(!s.sentences.length)s.sentences=[...DEFAULT];save();$("settingsModal").classList.remove("show")};$("closeSettings").onclick=()=>$("settingsModal").classList.remove("show");$("settingsBtn").onclick=settings;$("modalSettings").onclick=()=>{$("startModal").classList.remove("show");settings()};$("modalStart").onclick=start;$("startBtn").onclick=start;$("againBtn").onclick=start;render();

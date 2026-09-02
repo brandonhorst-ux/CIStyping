@@ -1,46 +1,14 @@
-# Type & Go! ⌨️🐶
+# Type & Go!
+Kid-friendly lowercase keyboarding game for GitHub Pages.
 
-A simple, low-distraction keyboarding game for practicing short lowercase sentences.
+Features: short sentences, no timer, key sounds, reward sounds/animations, stars/streaks, puppy movement, teacher settings, editable sentences, game length, volume, and wrong-key behavior. Settings are saved in the browser.
 
-## Features
+## GitHub Pages
+1. Create a GitHub repository.
+2. Upload `index.html`, `style.css`, and `game.js` to the repository root.
+3. Open **Settings → Pages**.
+4. Under **Build and deployment**, choose **Deploy from a branch**.
+5. Select `main` and `/ (root)`, then click **Save**.
+6. Wait for GitHub to publish the site; then use **Visit site**.
 
-- 10 short sentences
-- No capital letters required
-- Incorrect letters are gently rejected rather than causing a failure
-- Large typing area
-- Simple progress bar
-- Stars and streaks
-- Short celebration animation after each sentence
-- Puppy moves toward the house
-- Works on desktop, Chromebook, or tablet with a keyboard
-- No server or database required
-
-## Run it
-
-You can open `index.html` directly in a browser.
-
-## Put it on GitHub Pages
-
-1. Create a new GitHub repository.
-2. Upload `index.html`, `style.css`, and `game.js`.
-3. Commit the files.
-4. In the repository, open **Settings → Pages**.
-5. Under **Build and deployment**, choose **Deploy from a branch**.
-6. Select the `main` branch and `/ (root)`.
-7. Save.
-
-GitHub will provide a web address for the game.
-
-## Change the sentences
-
-Open `game.js` and edit the `sentences` list:
-
-```js
-const sentences = [
-  "the dog runs fast",
-  "i see a red ball",
-  "the cat is sleeping"
-];
-```
-
-Keep the sentences lowercase if you want the game to remain a lowercase-only activity.
+The site is entirely static—no server or database is required. Sound starts after the learner clicks Start because browsers restrict automatic audio playback.
