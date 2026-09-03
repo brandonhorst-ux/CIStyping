@@ -486,14 +486,6 @@ $("closeSettings").onclick=()=>
 $("settingsBtn").onclick=settings;
 
 
-$("modalSettings").onclick=()=>{
-
-  $("startModal").classList.remove("show");
-
-  settings();
-
-};
-
 
 $("modalStart").onclick=start;
 
