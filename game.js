@@ -11,7 +11,7 @@ let s=JSON.parse(localStorage.getItem(KEY)||"null")||{
   sentences:[...DEFAULT],
   soundOn:true,
   volume:.6,
-  count:"10",
+  count:"4",
   wrongMode:"block"
 };
 
