@@ -1,14 +1,8 @@
 const DEFAULT=[
-  "the dog runs",
-  "i see a cat",
-  "the dog has a ball",
-  "we like to play",
-  "the cat is sleeping",
-  "i can type",
-  "the bird can fly",
-  "go to the door",
-  "the sun is hot",
-  "the puppy is happy"
+  "jonny likes pizza",
+  "he likes animal crackers",
+  "i live in chadron",
+  "i like to eat cookies"
 ];
 
 const KEY="typeAndGoSettingsV2";
