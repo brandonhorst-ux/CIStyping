@@ -2,7 +2,8 @@ const DEFAULT=[
   "jonny likes pizza",
   "he likes animal crackers",
   "i live in chadron",
-  "i like to eat cookies"
+  "i like to eat cookies",
+  "i like to watch wild kratts"
 ];
 
 const KEY="typeAndGoSettingsV2";
