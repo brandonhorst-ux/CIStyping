@@ -3,7 +3,8 @@ const DEFAULT=[
   "he likes animal crackers",
   "i live in chadron",
   "i like to eat cookies",
-  "i like to watch wild kratts"
+  "i like to watch wild kratts",
+  "it is almost Christmas time"
 ];
 
 const KEY="typeAndGoSettingsV2";
